@@ -7,14 +7,10 @@ import mlflow
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
-
-
 # define functions
 def main(args):
     # TO DO: enable autologging
     mlflow.autolog()
-
-
     # read data
     df = get_csvs_df(args.training_data)
 
@@ -23,12 +19,9 @@ def main(args):
 
     # train model
     train_model(args.reg_rate, X_train, X_test, y_train, y_test)
-
-
 def get_csvs_df(path):
     if not os.path.exists(path):
         raise RuntimeError(f"Cannot use non-existent path provided: {path}")
-    
     if os.path.isdir(path):
         csv_files = glob.glob(f"{path}/*.csv")
         if not csv_files:
@@ -36,26 +29,15 @@ def get_csvs_df(path):
         return pd.concat((pd.read_csv(f) for f in csv_files), sort=False)
     else:
         return pd.read_csv(path)
-
-
-# TO DO: add function to split data
-
-
 def split_data(df, test_size=0.3, random_state=42):
     # Assuming the target variable is the last column in the dataframe
     X = df.iloc[:, :-1]
     y = df.iloc[:, -1]
-    
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=test_size, random_state=random_state)
-    
     return X_train, X_test, y_train, y_test
-    
-
 def train_model(reg_rate, X_train, X_test, y_train, y_test):
     # train model
     LogisticRegression(C=1/reg_rate, solver="liblinear").fit(X_train, y_train)
-
-
 def parse_args():
     # setup arg parser
     parser = argparse.ArgumentParser()
@@ -71,13 +53,11 @@ def parse_args():
 
     # return args
     return args
-
 # run script
 if __name__ == "__main__":
     # add space in logs
     print("\n\n")
     print("*" * 60)
-
     # parse args
     args = parse_args()
 
