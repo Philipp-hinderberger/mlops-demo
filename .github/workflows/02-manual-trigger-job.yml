@@ -22,3 +22,6 @@ jobs:
           echo "src directory:"
           ls -l src
           az ml job create --file src/job.yml --resource-group AI --workspace-name wherethemagichappens
+      - name: Placeholder
+        run: |
+          echo "Will add code checks here in next challenge"
