@@ -31,7 +31,7 @@ jobs:
 
       - name: Train model (experiment)
         run: |
-          az ml job create --file job.yml --resource-group AI --workspace-name wherethemagichappens --webhook-action run --stream
+          az ml job create --file job.yml --resource-group AI --workspace-name wherethemagichappens --stream
 
   production:
     needs: experiment
@@ -59,4 +59,4 @@ jobs:
 
       - name: Train model (production)
         run: |
-          az ml job create --file prod-job.yml --resource-group AI --workspace-name wherethemagichappens --webhook-action run --stream
+          az ml job create --file prod-job.yml --resource-group AI --workspace-name wherethemagichappens --stream
